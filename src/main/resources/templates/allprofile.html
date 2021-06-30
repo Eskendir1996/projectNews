@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th = "http://www.thymeleaf.org"
+      xmlns:layout = "http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" layout:decorator="layout/main.html">
+
+<div layout:fragment="mainContent">
+        <div class ="row mt-5">
+            <div class = "col-12" th:if="${CURRENT_USER}">
+                <div class="card mb-3 col-12">
+                    <div class="row g-0">
+                        <div class="col-12">
+                            <div class="card-body">
+                                <h5 class="card-title text-center" style="color: #033E3E;" th:text="${'Name: '+CURRENT_USER.getName()+', Surname: '+CURRENT_USER.getSurname()}"></h5>
+                                <div class="col-12 mt-2">
+                                    <img th:src="${CURRENT_USER.getPictureurl()}" width="100%" height="400px">
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <a class="btn mt-2" th:href="@{'/khabarlama/'+${CURRENT_USER.getUserurl()}}" style="background-color:#033E3E; color: #ffc222;" th:text="#{allprofile.write}"></a>
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <a class="btn mt-2" th:href="@{'/call/'+${CURRENT_USER.getUserurl()}}" style="background-color:#ffc222; color: #033E3E;" th:text="#{allprofile.call}"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+</html>

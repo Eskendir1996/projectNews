@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th = "http://www.thymeleaf.org"
+      xmlns:layout = "http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" layout:decorator="layout/main.html">
+
+<div layout:fragment="mainContent">
+    <div class="row mt-5">
+        <h1 class="text-center" style="color: #ffc222;" th:text="#{admin.moderators}"></h1>
+        <table>
+            <thead>
+            <tr>
+                <th th:text="#{admin.image}"></th>
+                <th th:text="#{admin.username}"></th>
+                <th th:text="#{admin.surname}"></th>
+                <th th:text="#{admin.url}"></th>
+                <th th:text="#{admin.email}"></th>
+                <th th:text="#{admin.settings}"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="m:${moderators}" class = "mt-2">
+                <td>
+                    <img th:src="${m.getPictureurl()}" width="80" height="80">
+                </td>
+                <td th:text="${m.getName()}"></td>
+                <td th:text="${m.getSurname()}"></td>
+                <td th:text="${m.getUserurl()}"></td>
+                <td th:text="${m.getEmail()}"></td>
+                <td width="10%">
+                    <a th:href="@{'/admin/moderator/settings/'+${m.getUserurl()}}" class = "btn" style="background-color: #ffc222;" th:text="#{admin.view}"></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row mt-3">
+        <h1 class="text-center" style="color: #ffc222;" th:text="#{admin.users}"></h1>
+        <table>
+            <thead>
+            <tr>
+                <th th:text="#{admin.image}"></th>
+                <th th:text="#{admin.username}"></th>
+                <th th:text="#{admin.surname}"></th>
+                <th th:text="#{admin.url}"></th>
+                <th th:text="#{admin.email}"></th>
+                <th th:text="#{admin.settings}"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="u:${users}" class = "mt-2">
+                <td>
+                    <img th:src="${u.getPictureurl()}" width="80" height="80">
+                </td>
+                <td th:text="${u.getName()}"></td>
+                <td th:text="${u.getSurname()}"></td>
+                <td th:text="${u.getUserurl()}"></td>
+                <td th:text="${u.getEmail()}"></td>
+                <td width="10%">
+                    <a th:href="@{'/admin/user/settings/'+${u.getUserurl()}}" class = "btn" style="background-color: #ffc222;" th:text="#{admin.view}"></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row mt-3">
+        <h1 class="text-center" style="color: #ffc222;" th:text="#{admin.news}"></h1>
+        <table>
+            <thead>
+            <tr>
+                <th th:text="#{admin.image}"></th>
+                <th th:text="#{admin.newsid}"></th>
+                <th th:text="#{admin.username}"></th>
+                <th th:text="#{admin.newstime}"></th>
+                <th th:text="#{admin.newscity}"></th>
+                <th th:text="#{admin.settings}"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="n:${news}" class = "mt-2">
+                <td>
+                    <img th:src="${n.getImage()}" width="80" height="80">
+                </td>
+                <td th:text="${n.getId()}"></td>
+                <td th:text="${n.getUser().getName()+' '+n.getUser().getSurname()}"></td>
+                <td th:text="${n.getTime_date()}"></td>
+                <td th:text="${n.getCities().getName()}"></td>
+                <td width="10%">
+                    <a th:href="@{'/admin/news/settings/'+${n.getId()}}" class = "btn" style="background-color: #ffc222;" th:text="#{admin.view}"></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th = "http://www.thymeleaf.org"
+      xmlns:layout = "http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to news portal</title>
+    <link type = "text/css" rel="stylesheet" th:href="@{'/css/bootstrap.css'}">
+    <link type = "text/css" rel="stylesheet" th:href="@{'/css/style.css'}">
+    <link rel="stylesheet" href="../../../../../../../lesson2/ZZZ/Proekt/css/style.css">
+</head>
+<body>
+<div class = "container" style="background-color: #033E3E;">
+    <nav class="navbar navbar-expand-lg navbar-danger"
+         xmlns:th = "http://www.thymeleaf.org"
+         xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{'/'}" th:text="#{menu.news}"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0" sec:authorize="isAnonymous()">
+                    <li>
+                        <a class="nav-link active" aria-current="page" th:href="@{'/menu/'}" th:text="#{menu.home}"></a>
+                    </li>
+                    <li>
+                        <a class="nav-link active" aria-current="page" th:href="@{'/login'}" th:text="#{menu.signin}"></a>
+                    </li>
+                    <li>
+                        <a class="nav-link active" aria-current="page" th:href="@{'/register'}" th:text="#{menu.signup}"></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" th:text="#{menu.lang}"></a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" th:href="@{'?lng=kz'}">Қазақша</a></li>
+                            <li><a class="dropdown-item" th:href="@{'?lng=ru'}">Русский</a></li>
+                            <li><a class="dropdown-item" th:href="@{'?lng=en'}">English</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0" sec:authorize="isAuthenticated()">
+                    <li>
+                        <a class="nav-link active" aria-current="page" th:href="@{'/menu/'}" th:text="#{menu.home}"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{'/user/profile'}" th:text="#{menu.profile}"></a>
+                    </li>
+                    <li sec:authorize="hasAnyRole('ROLE_ADMIN')">
+                        <a class="nav-link active" aria-current="page" th:href="@{'/admin/'}" th:text="#{menu.admin}"></a>
+                    </li>
+                    <li sec:authorize="hasAnyRole('ROLE_MODERATOR','ROLE_ADMIN')">
+                        <a class="nav-link active" aria-current="page" th:href="@{'/moderator/'}" th:text="#{menu.moderator}"></a>
+                    </li>
+                    <li>
+                        <a class="nav-link active" aria-current="page" href="JavaScript:void(0);" onclick="Logout()" th:text="#{menu.logout}"></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" th:text="#{menu.lang}"></a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" th:href="@{'?lng=kz'}">Қазақша</a></li>
+                            <li><a class="dropdown-item" th:href="@{'?lng=ru'}">Русский</a></li>
+                            <li><a class="dropdown-item" th:href="@{'?lng=en'}">English</a></li>
+                        </ul>
+                    </li>
+                    <form th:action="@{'/logout'}" method="post" id="logout"></form>
+                    <script>
+                        function Logout() {
+                            document.getElementById('logout').submit();
+                        }
+                    </script>
+                </ul>
+                <form class="d-flex" th:action="@{'/search'}" method="get">
+                    <input class="form-control me-2" name = "key" type="search" th:placeholder="#{menu.newssearch}" aria-label="Search">
+                    <button class="btn btn-light" type="submit"  th:text="#{menu.search}"></button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+</div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12" layout:fragment="mainContent">
+
+            </div>
+        </div>
+    </div>
+    <div class = "container_fill">
+        <div class = "row mt-5">
+            <div class = "col-12">
+                <footer class="footer">
+                    <div class="footer__content">
+                        <div class="container">
+                            <div class="footer__inner">
+                                <div class="footer__info">
+                                    <div class="footer__title" th:text="#{footer.ouradresstext}">
+                                    </div>
+                                    <div class="footer__text" th:text="#{footer.error}">
+                                    </div>
+                                    <a data-fancybox data-src="#modal" th:href="@{'zakaz'}" style="text-decoration: none;" class="header__btn" href="#" th:text="#{allprofile.write}"></a>
+                                </div>
+                                <div class="footer__map">
+                                    <iframe width="630px" height= "250px" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d181.696119495166!2d76.85081335767856!3d43.227568079991954!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x388369b6404f24ed%3A0xb5b244989e391c6c!2z0YPQu9C40YbQsCDQo9C70YPQs9Cx0LXQutCwIDQyLCDQkNC70LzQsNGC0YsgMDUwMDAw!5e0!3m2!1sru!2skz!4v1619452460197!5m2!1sru!2skz" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                                </div>
+                            </div>
+                            <div class="ul__footer">
+                                <a class="a__text" style="color: #ffc222;" href="tel:77776222004">+77776222004</a>
+                                <a class="a__text" style="color: #ffc222;" href="#">nurmanongal@gmail.com</a>
+                                <a class="a__text" style="color: #ffc222;" href="#" th:text="#{footer.ouradress}"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer__copy">
+                        <div class="container mt-1 mb-1">
+                            <div class="copy__text d-flex justify-content-center" th:text="#{footer.template}">
+
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+</body>
+    <script type = "text/javascript" th:src="@{'/js/bootstrap.js'}"></script>
+</html>

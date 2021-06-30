@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th = "http://www.thymeleaf.org"
+      xmlns:layout = "http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" layout:decorator="layout/main.html">
+
+<div layout:fragment="mainContent">
+    <div class="row mt-5">
+        <div class="col-6 mx-auto">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if = "${(param.error!=null)}">
+                <div th:text="#{login.emailorpassword}"></div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <form th:action="@{'/auth'}" method="post">
+                <div class="mt-1">
+                    <label style="color:#ffc222;" th:text="#{menu.email}"></label>
+                    <input type = "email" class = "form-control mt-1" name = "user_email" th:placeholder="#{menu.emailofuser}">
+                </div>
+                <div class="mt-1">
+                    <label  style="color:#ffc222;" th:text="#{menu.password}"></label>
+                    <input type = "password" class = "form-control mt-1" name = "user_password" th:placeholder="#{menu.passwordofuser}">
+                </div>
+                <div class = "mt-2 d-flex justify-content-center">
+                    <button class = "btn" style="background-color: #033E3E; width: 300px; color: #ffc222;" th:text="#{menu.signin}"></button>
+                    <a class = "btn" th:href="@{'/register'}" style="background-color: #ffc222; width: 300px; color: #033E3E;" th:text="#{menu.signup}"></a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</html>

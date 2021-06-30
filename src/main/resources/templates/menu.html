@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th = "http://www.thymeleaf.org"
+      xmlns:layout = "http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" layout:decorator="layout/main.html">
+<div layout:fragment="mainContent">
+    <div class = "row mt-3">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if = "${(param.newserror!=null)}">
+            <div th:text="#{menu.nonews}"></div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div class = "col-12">
+            <div class = "mb-2">
+                <h4 style="color: #ffc222;" class="text-center">Қоғам жаңалықтары</h4>
+            </div>
+        </div>
+        <div class = "col-4" th:each="n:${qogamnews}">
+            <div class = "col-12 mt-3 ">
+                <div class="card-group">
+                    <div class="card">
+                        <img th:src="${n.getImage()}" class="card-img-top" alt="" height="200px">
+                        <div class="card-body">
+                            <h6 class="card-title" th:text="${n.getTitle}"></h6>
+                            <p class="card-text" th:text="${n.getCities().getName()}"></p>
+                            <div class="card-footer">
+                                <small class="text-muted" th:text="${n.getTime_date()}"></small>
+                            </div>
+                            <a class="btn" style="background-color: #ffc222;" th:text="#{admin.view}" th:href="@{'/menu/news/'+${n.getId()}}"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class = "row mt-3">
+        <div class = "col-12">
+            <div class = "mb-2">
+                <h4 style="color: #ffc222;" class="text-center">Әлем жаңалықтары</h4>
+            </div>
+        </div>
+        <div class = "col-4" th:each="n:${alemnews}">
+            <div class = "col-12 mt-3 ">
+                <div class="card-group">
+                    <div class="card">
+                        <img th:src="${n.getImage()}" class="card-img-top" alt="" height="200px">
+                        <div class="card-body">
+                            <h6 class="card-title" th:text="${n.getTitle}"></h6>
+                            <p class="card-text" th:text="${n.getCities().getName()}"></p>
+                            <div class="card-footer">
+                                <small class="text-muted" th:text="${n.getTime_date()}"></small>
+                            </div>
+                            <a class="btn" style="background-color: #ffc222;" th:text="#{admin.view}" th:href="@{'/menu/news/'+${n.getId()}}"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class = "row mt-3">
+        <div class = "col-12">
+            <div class = "mb-2">
+                <h4 style="color: #ffc222;" class="text-center">Cпорт жаңалықтары</h4>
+            </div>
+        </div>
+        <div class = "col-4" th:each="n:${sportnews}">
+            <div class = "col-12 mt-3 ">
+                <div class="card-group">
+                    <div class="card">
+                        <img th:src="${n.getImage()}" class="card-img-top" alt="" height="200px">
+                        <div class="card-body">
+                            <h6 class="card-title" th:text="${n.getTitle}"></h6>
+                            <p class="card-text" th:text="${n.getCities().getName()}"></p>
+                            <div class="card-footer">
+                                <small class="text-muted" th:text="${n.getTime_date()}"></small>
+                            </div>
+                            <a class="btn" style="background-color: #ffc222;" th:text="#{admin.view}" th:href="@{'/menu/news/'+${n.getId()}}"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class = "row mt-3">
+        <div class = "col-12">
+            <div class = "mb-2">
+                <h4 style="color: #ffc222;" class="text-center">Отбасы жаңалықтары</h4>
+            </div>
+        </div>
+        <div class = "col-4" th:each="n:${otbasynews}">
+            <div class = "col-12 mt-3 ">
+                <div class="card-group">
+                    <div class="card">
+                        <img th:src="${n.getImage()}" class="card-img-top" alt="" height="200px">
+                        <div class="card-body">
+                            <h6 class="card-title" th:text="${n.getTitle}"></h6>
+                            <p class="card-text" th:text="${n.getCities().getName()}"></p>
+                            <div class="card-footer">
+                                <small class="text-muted" th:text="${n.getTime_date()}"></small>
+                            </div>
+                            <a class="btn" style="background-color: #ffc222;" th:text="#{admin.view}" th:href="@{'/menu/news/'+${n.getId()}}"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class = "row mt-3">
+        <div class = "col-12">
+            <div class = "mb-2">
+                <h4 style="color: #ffc222;" class="text-center">Қазына жаңалықтары</h4>
+            </div>
+        </div>
+        <div class = "col-4" th:each="n:${qazynanews}">
+            <div class = "col-12 mt-3 ">
+                <div class="card-group">
+                    <div class="card">
+                        <img th:src="${n.getImage()}" class="card-img-top" alt="" height="200px">
+                        <div class="card-body">
+                            <h6 class="card-title" th:text="${n.getTitle}"></h6>
+                            <p class="card-text" th:text="${n.getCities().getName()}"></p>
+                            <div class="card-footer">
+                                <small class="text-muted" th:text="${n.getTime_date()}"></small>
+                            </div>
+                            <a class="btn" style="background-color: #ffc222;" th:text="#{admin.view}" th:href="@{'/menu/news/'+${n.getId()}}"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class = "row mt-3">
+        <div class = "col-12">
+            <div class = "mb-2">
+                <h4 style="color: #ffc222;" class="text-center">Әлеумет жаңалықтары</h4>
+            </div>
+        </div>
+        <div class = "col-4" th:each="n:${aleumetnews}">
+            <div class = "col-12 mt-3">
+                <div class="card-group">
+                    <div class="card">
+                        <img th:src="${n.getImage()}" class="card-img-top" alt="" height="200px">
+                        <div class="card-body">
+                            <h6 class="card-title" th:text="${n.getTitle}"></h6>
+                            <p class="card-text" th:text="${n.getCities().getName()}"></p>
+                            <div class="card-footer">
+                                <small class="text-muted" th:text="${n.getTime_date()}"></small>
+                            </div>
+                            <a class="btn" style="background-color: #ffc222;" th:text="#{admin.view}" th:href="@{'/menu/news/'+${n.getId()}}"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class = "row mt-3">
+        <div class = "col-12">
+            <div class = "mb-2">
+                <h4 style="color: #ffc222;" class="text-center">Саясат пен қаржы жаңалықтары</h4>
+            </div>
+        </div>
+        <div class = "col-4" th:each="n:${sayasatnews}">
+            <div class = "col-12 mt-3 ">
+                <div class="card-group">
+                    <div class="card">
+                        <img th:src="${n.getImage()}" class="card-img-top" alt="" height="200px">
+                        <div class="card-body">
+                            <h6 class="card-title" th:text="${n.getTitle}"></h6>
+                            <p class="card-text" th:text="${n.getCities().getName()}"></p>
+                            <div class="card-footer">
+                                <small class="text-muted" th:text="${n.getTime_date()}"></small>
+                            </div>
+                            <a class="btn" style="background-color: #ffc222;" th:text="#{admin.view}" th:href="@{'/menu/news/'+${n.getId()}}"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class = "row mt-3">
+        <div class = "col-12">
+            <div class = "mb-2">
+                <h4 style="color: #ffc222;" class="text-center">Шоу-бизнес жаңалықтары</h4>
+            </div>
+        </div>
+        <div class = "col-4" th:each="n:${showbiznews}">
+            <div class = "col-12 mt-3 ">
+                <div class="card-group">
+                    <div class="card">
+                        <img th:src="${n.getImage()}" class="card-img-top" alt="" height="200px">
+                        <div class="card-body">
+                            <h6 class="card-title" th:text="${n.getTitle}"></h6>
+                            <p class="card-text" th:text="${n.getCities().getName()}"></p>
+                            <div class="card-footer">
+                                <small class="text-muted" th:text="${n.getTime_date()}"></small>
+                            </div>
+                            <a class="btn" style="background-color: #ffc222;" th:text="#{admin.view}" th:href="@{'/menu/news/'+${n.getId()}}"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class = "row mt-3">
+        <div class = "col-12">
+            <div class = "mb-2">
+                <h4 style="color: #ffc222;" class="text-center">Өнер жаңалықтары</h4>
+            </div>
+        </div>
+        <div class = "col-4" th:each="n:${onernews}">
+            <div class = "col-12 mt-3 ">
+                <div class="card-group">
+                    <div class="card">
+                        <img th:src="${n.getImage()}" class="card-img-top" alt="" height="200px">
+                        <div class="card-body">
+                            <h6 class="card-title" th:text="${n.getTitle}"></h6>
+                            <p class="card-text" th:text="${n.getCities().getName()}"></p>
+                            <div class="card-footer">
+                                <small class="text-muted" th:text="${n.getTime_date()}"></small>
+                            </div>
+                            <a class="btn" style="background-color: #ffc222;" th:text="#{admin.view}" th:href="@{'/menu/news/'+${n.getId()}}"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class = "row mt-3">
+        <div class = "col-12">
+            <div class = "mb-2">
+                <h4 style="color: #ffc222;" class="text-center">Пайдалы кеңестер</h4>
+            </div>
+        </div>
+        <div class = "col-4" th:each="n:${paidalykengesternews}">
+            <div class = "col-12 mt-3 ">
+                <div class="card-group">
+                    <div class="card">
+                        <img th:src="${n.getImage()}" class="card-img-top" alt="" height="200px">
+                        <div class="card-body">
+                            <h6 class="card-title" th:text="${n.getTitle}"></h6>
+                            <p class="card-text" th:text="${n.getCities().getName()}"></p>
+                            <div class="card-footer">
+                                <small class="text-muted" th:text="${n.getTime_date()}"></small>
+                            </div>
+                            <a class="btn" style="background-color: #ffc222;" th:text="#{admin.view}" th:href="@{'/menu/news/'+${n.getId()}}"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</html>

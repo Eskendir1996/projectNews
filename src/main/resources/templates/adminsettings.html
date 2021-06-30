@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th = "http://www.thymeleaf.org"
+      xmlns:layout = "http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" layout:decorator="layout/main.html">
+
+<div layout:fragment="mainContent" th:if="${moderator}">
+    <div class = "row mt-5">
+        <div class = "col-6 mx-auto" >
+            <form th:action="@{'/admin/moderator/settings/update/'+${moderator.getUserurl()}}" method="post">
+                <div class = "mt-2">
+                    <div class ="mt-1">
+                        <label style="color:#ffc222;" th:text="#{admin.email}"></label>
+                    </div>
+                    <div class ="mt-1">
+                        <input type="email" class = "form-control" required name = "user_email" th:value="${moderator.getEmail()}">
+                    </div>
+                </div>
+                <div class = "mt-2">
+                    <div class ="mt-1">
+                        <label style="color:#ffc222;" th:text="#{adminsettings.password}"></label>
+                        <input type="text" name = "user_password" required th:value="${moderator.getPassword()}"  class = "form-control">
+                    </div>
+                </div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th style="color:#ffc222;" th:text="#{admin.name}"></th>
+                        <th style="color:#ffc222;" th:text="#{admin.surname}"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <input type="text" name="user_name" required class="form-control" th:value="${moderator.getName()}">
+                        </td>
+                        <td>
+                            <input type="text" name="user_surname" required class="form-control" th:value="${moderator.getSurname()}">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class = "mt-2">
+                    <div class = "mt-1">
+                    <label style="color:#ffc222;" th:text="#{admin.url}"></label>
+                    </div>
+                    <div class = "mt-1">
+                    <input type="text" required name = "user_url" th:value="${moderator.getUserurl()}" class = "form-control">
+                    </div>
+                </div>
+                <div class="col-12 mt-2">
+                    <img th:src="${moderator.getPictureurl()}" required width="100%" height="400px">
+                </div>
+                <div class = "mt-1">
+                    <label style="color:#ffc222;" th:text="#{admin.image}"></label>
+                </div>
+                <div class = "mt-1">
+                    <input type="text" name = "picture_url" required th:value="${moderator.getPictureurl()}" class = "form-control">
+                </div>
+                <div class = "mt-2 d-flex justify-content-center">
+                    <button class = "btn" style="background-color: #033E3E; width: 300px; color: #ffc222;" th:text="#{adminnewssettings.update}"></button>
+                    <a class = "btn" href="Javascript:void(0)" onclick="Delete()" style="background-color: #ffc222; width: 300px; color: #000000;" th:text="#{adminsettings.deletemoderator}"></a>
+                </div>
+            </form>
+            <form th:action="@{'/admin/moderator/settings/delete/'+${moderator.getUserurl()}}" id="delete" method="post"></form>
+            <script>
+                function Delete() {
+                    document.getElementById("delete").submit();
+                }
+            </script>
+        </div>
+    </div>
+
+    <div class ="row mt-3">
+        <div class ="col-6 mx-auto">
+            <table class ="table table-striped">
+                <tbody>
+                <tr th:each="ro:${moderator.getRoles()}">
+                    <form th:action="@{'/admin/moderator/removerole'}"method="post">
+                        <input type="hidden" name="role_id" th:value="${ro.getId()}">
+                        <input type="hidden" name="user_url" th:value="${moderator.getUserurl()}">
+                        <td th:text="${ro.getRole()}"></td>
+                        <td width="10%">
+                            <button class ="btn btn-danger btn-sm">
+                                -
+                            </button>
+                        </td>
+                    </form>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class ="row mt-3">
+        <div class ="col-6 mx-auto">
+            <table class ="table table-striped">
+                <tbody>
+                <tr th:each="ro:${roles}">
+                    <form th:action="@{'/admin/moderator/addrole'}"method="post">
+                        <input type="hidden" name="role_id" th:value="${ro.getId()}">
+                        <input type="hidden" name="user_url" th:value="${moderator.getUserurl()}">
+                        <td th:text="${ro.getRole()}"></td>
+                        <td width="10%">
+                            <button class ="btn btn-success btn-sm">
+                                +
+                            </button>
+                        </td>
+                    </form>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</html>

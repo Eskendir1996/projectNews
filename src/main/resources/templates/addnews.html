@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th = "http://www.thymeleaf.org"
+      xmlns:layout = "http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" layout:decorator="layout/main.html">
+
+<div layout:fragment="mainContent">
+    <div class="row mt-5">
+        <div class="col-6 mx-auto">
+            <form th:action="@{'/news/addnews'}" method="post">
+                <div class="mt-2">
+                    <div class = "mt-1">
+                        <label style="color:#ffc222;" th:text="#{addnews.titlenews}"></label>
+                    </div>
+                    <div class = "mt-1">
+                        <input type = "text" name = "title" required class = "form-control" th:placeholder="#{addnews.titlenewsplaceholder}">
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <div class = "mt-1">
+                        <label style="color:#ffc222;" th:text="#{addnews.textnews}"> </label>
+                    </div>
+                    <div class = "mt-1">
+                        <textarea name = "text" required th:placeholder="#{addnews.textnewsplaceholder}" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <div class = "mt-1">
+                        <label style="color:#ffc222;" th:text="#{addnews.imagenews}"></label>
+                    </div>
+                    <div class = "mt-1">
+                        <input type = "text" name = "image" required class = "form-control" th:placeholder="#{addnews.imagenewsplaceholder}">
+                    </div>
+                </div>
+                <div class = "mt-2">
+                    <div class = "mt-1">
+                        <label style="color:#ffc222;" th:text="#{addnews.citiesnews}"> </label>
+                    </div>
+                    <div class = "mt-1">
+                        <select class = "form-control" name = "city_id">
+                            <option th:each="c:${cities}" th:text="${c.getName()}+' / '+${c.getCity_id()}" th:value="${c.getId()}" name="city_id"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class = "mt-2 d-flex justify-content-center">
+                    <button class = "btn" style="background-color: #033E3E; width: 300px; color: #ffc222;" th:text="#{addnews.addnews}"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</html>

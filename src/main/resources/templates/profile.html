@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th = "http://www.thymeleaf.org"
+      xmlns:layout = "http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" layout:decorator="layout/main.html">
+
+<div layout:fragment="mainContent">
+        <div class ="row mt-5">
+            <div class = "col-12" th:if="${CURRENT_USER}">
+                <div class="card mb-3 col-12">
+                    <div class="row g-0">
+                        <div class="col-12">
+                            <div class="card-body">
+                                <h5 class="card-title text-center" style="color: #033E3E;" th:text="${'Name: '+CURRENT_USER.getName()+', Surname: '+CURRENT_USER.getSurname()}"></h5>
+                                <div class="col-12 mt-2">
+                                    <img th:src="${CURRENT_USER.getPictureurl()}" width="100%" height="400px">
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <a class="btn mt-2" th:href="@{'/user/updateprofile/'+${CURRENT_USER.getUserurl()}}" style="background-color:#033E3E; color: #ffc222;" th:text="#{profile.settingsprofile}"></a>
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <a class="btn mt-2" th:href="@{'/news/addnews'}" style="background-color:#ffc222; color: #033E3E;" th:text="#{addnews.addnews}"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class = "col-12" th:each="n:${news}">
+                <div class="card mb-3 col-12">
+                    <div class="row g-0">
+                        <div class="col-12">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${n.getTitle()}"></h5>
+                                <div class="col-12 mt-2">
+                                    <img th:src="${n.getImage()}" width="100%" height="400px">
+                                </div>
+                                <p class="card-text mt-1" th:text="${n.getText()}"></p>
+                                <p class="card-text mt-1" th:text="${'City: '+n.getCities().getName()}"><small class="text-muted"></small></p>
+                                <p class="card-text mt-1" th:text="${'Time: '+n.getTime_date()}"><small class="text-muted"></small></p>
+                            </div>
+                            <div class = "d-flex justify-content-center">
+                                <a class = "btn" th:href="@{'/user/news/settings/'+${n.getId()}}" style="background-color: #033E3E; width: 300px; color: #ffc222;" th:text="#{admin.settings}"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+</html>

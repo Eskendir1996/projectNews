@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th = "http://www.thymeleaf.org"
+      xmlns:layout = "http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" layout:decorator="layout/main.html">
+
+<div layout:fragment="mainContent">
+    <div class = "row mt-5">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if = "${(param.emailzaregistirovan!=null)}">
+            Кешіріңіз, сіз жазған E-mail бұрын тіркеліп қойған!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if = "${(param.urlzaregistirovan!=null)}">
+            Кешіріңіз, сіз жазған сілтемеңіз бұрын тіркеліп қойған!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div class = "col-6 mx-auto" th:if="${CURRENT_USER}">
+            <form th:action="@{'/moderator/user/settings/update/'+${CURRENT_USER.getUserurl()}}" method="post">
+                <div class = "mt-2">
+                    <div class ="mt-1">
+                        <label style="color:#ffc222;" th:text="#{admin.email}"></label>
+                    </div>
+                    <div class ="mt-1">
+                        <input type="email" class = "form-control" required name = "user_email" th:value="${CURRENT_USER.getEmail()}">
+                    </div>
+                </div>
+                <div class = "mt-2">
+                    <div class ="mt-1">
+                        <label style="color:#ffc222;" th:text="#{adminsettings.password}"></label>
+                        <input type="text" name = "user_password" required th:value="${CURRENT_USER.getPassword()}"  class = "form-control">
+                    </div>
+                </div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th style="color:#ffc222;" th:text="#{admin.name}"></th>
+                        <th style="color: #ffc222;" th:text="#{admin.surname}"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <input type="text" name="user_name" required class="form-control" th:value="${CURRENT_USER.getName()}">
+                        </td>
+                        <td>
+                            <input type="text" name="user_surname" required class="form-control" th:value="${CURRENT_USER.getSurname()}">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class = "mt-2">
+                    <div class = "mt-1">
+                    <label style="color:#ffc222;" th:text="#{admin.url}"></label>
+                    </div>
+                    <div class = "mt-1">
+                    <input type="text" name = "user_url" required th:value="${CURRENT_USER.getUserurl()}" class = "form-control">
+                    </div>
+                </div>
+                <div class="col-12 mt-2">
+                    <img th:src="${CURRENT_USER.getPictureurl()}" width="100%" height="400px">
+                </div>
+                <div class = "mt-1">
+                    <label style="color:#ffc222;" th:text="#{admin.image}"></label>
+                </div>
+                <div class = "mt-1">
+                    <input type="text" name = "picture_url" required th:value="${CURRENT_USER.getPictureurl()}" class = "form-control">
+                </div>
+                <div class = "mt-2 d-flex justify-content-center">
+                    <button class = "btn" style="background-color: #033E3E; width: 300px; color: #ffc222;" th:text="#{admin.settings}"></button>
+                    <a class = "btn" href="Javascript:void(0)" onclick="Delete()" style="background-color: #ffc222; width: 300px; color: #000000;" th:text="#{admin.deleteuser}"></a>
+                </div>
+            </form>
+            <form th:action="@{'/moderator/user/settings/delete/'+${CURRENT_USER.getUserurl()}}" id="delete" method="post"></form>
+            <script>
+                function Delete() {
+                    document.getElementById("delete").submit();
+                }
+            </script>
+        </div>
+    </div>
+</div>
+</html>
